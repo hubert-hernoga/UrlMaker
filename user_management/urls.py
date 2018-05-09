@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$', MainPage.as_view(), name='main_page'),
     url('user_list/', UserList.as_view(), name='user_list'),
-    url('add_user/', AddUserList.as_view(), name='add_user'),
+    url('add_user/(?P<user_id>(\d)+|)', AddUserList.as_view(), name='add_user'),
 ]
