@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user_panel.views import MainPage, UserList
+from user_panel.views import MainPage, UserList, AddUserList
 from django.conf.urls import url
 
 
@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$', MainPage.as_view(), name='main_page'),
     url('user_list/', UserList.as_view(), name='user_list'),
+    url('add_user/', AddUserList.as_view(), name='add_user'),
 ]
