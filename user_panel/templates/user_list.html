@@ -6,28 +6,24 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-              </tr>
-            </tbody>
+
+              {% for user in users %}
+
+                <tbody>
+                  <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                  </tr>
+                </tbody>
+
+              {% endfor %}
+
           </table>
         </div>
 

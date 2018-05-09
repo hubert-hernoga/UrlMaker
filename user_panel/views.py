@@ -3,6 +3,7 @@ from django.views import View
 from .forms import UserForm
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from .models import Profile
 
 class MainPage(View):
     def get(self, request):
@@ -12,11 +13,10 @@ class MainPage(View):
 class UserList(View):
     def get(self, request):
         users = User.objects.all()
-        userprofiles = P
-        ctx = {
-            'user_form': user_form
-        }
 
+        ctx = {
+            'users': users
+        }
         return render(request, 'user_list.html', ctx)
 
 
