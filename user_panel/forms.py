@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Profile
+from .models import Profile, Groups
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -24,3 +24,9 @@ class UserForm(forms.ModelForm):
         if password1 != password2:
             raise ValidationError("Passwords should be identical.")
         return password1
+
+
+class UserGroupsForm(ModelForm):
+    class Meta:
+        model = Groups
+        fields = ['name', 'users']
