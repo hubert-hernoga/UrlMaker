@@ -12,17 +12,24 @@
               </tr>
             </thead>
 
-              {% for user in users %}
+                <tbody >
 
-                <tbody>
-                  <tr>
+                {% for user in users %}
+
+                  <tr id="{{ user.id }}" class="current-user">
                     <td><a href='/add_user/{{ user.id }}'>{{ user.username }}</a></td>
                     <td><a href='/add_user/{{ user.id }}'>{{ user.first_name }}</a></td>
                     <td><a href='/add_user/{{ user.id }}'>{{ user.last_name }}</a></td>
+                    <td>
+                        <button id="{{ user.id }}" type="button" class="close remove-user" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
                   </tr>
-                </tbody>
 
-              {% endfor %}
+                {% endfor %}
+
+                </tbody>
 
           </table>
         </div>
