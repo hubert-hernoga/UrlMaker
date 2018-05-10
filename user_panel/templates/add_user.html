@@ -4,7 +4,7 @@
         <form method="post">
             {%	csrf_token	%}
             <p>{{ user_form.as_p }}</p>
-            <input type='submit' value='Add user'>
+            <input type='submit' class="btn btn-secondary" value='Add'>
         </form>
 
     {% endblock content %}
