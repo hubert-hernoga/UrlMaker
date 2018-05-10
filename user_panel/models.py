@@ -11,6 +11,9 @@ class Profile(models.Model):
     birth_date = models.DateField(default=datetime.date.today)
     list_groups = models.CharField(max_length=64, null=True)
 
+    def __str__(self):
+        return '{}'.format(self.user.username)
+
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
@@ -25,6 +28,6 @@ class Profile(models.Model):
         user.save()
 
 
-class UserGroups(models.Model):
+class Groups(models.Model):
     name = models.CharField(max_length=24, null=True)
-    users = models.ManyToManyField(Profile, related_name='groups')
+    users = models.ManyToManyField(User, related_name='user_groups')

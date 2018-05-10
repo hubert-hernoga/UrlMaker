@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load extras %}
+    {% block content %}
+
+        <div class="container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Group name</th>
+                <th>Users</th>
+              </tr>
+            </thead>
+
+                <tbody >
+
+                {% for group in groups %}
+
+                  <tr>
+                    <td><a href='/add_user/{{ user.id }}'>{{ group.name }}</a></td>
+                    <td><a href='/add_user/{{ user.id }}'>{{ group.name|user_in_group }}</a></td>
+                  </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+          </table>
+
+          <p class="lead">
+            <a href="/add_group" class="btn btn-secondary">Add group</a>
+          </p>
+        </div>
+
+    {% endblock content %}
