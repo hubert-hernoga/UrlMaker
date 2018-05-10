@@ -17,8 +17,8 @@
                 {% for group in groups %}
 
                   <tr id="{{ group.id }}" class="current-group">
-                    <td><a href='/add_user/{{ user.id }}'>{{ group.name }}</a></td>
-                    <td><a href='/add_user/{{ user.id }}'>{{ group.name|user_in_group }}</a></td>
+                    <td><a href='/add_group/{{ group.id }}'>{{ group.name }}</a></td>
+                    <td><a href='/add_group/{{ group.id }}'>{{ group.name|user_in_group }}</a></td>
                     <td>
                         <button id="{{ group.id }}" type="button" class="close remove-group" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

@@ -93,19 +93,34 @@ class GroupsList(View):
 
 
 class AddGroup(View):
-    def get(self, request):
-        group_form = UserGroupsForm()
+    def get(self, request, group_id):
+        if group_id:
+            selected_group = Groups.objects.get(pk=group_id)
+            selected_group_form = UserGroupsForm(initial={
+                'name': selected_group.name,
+            })
 
-        ctx = {
-            'group_form': group_form
-        }
+            ctx = {
+                'group_form': selected_group_form
+            }
+        else:
+            group_form = UserGroupsForm()
+
+            ctx = {
+                'group_form': group_form
+            }
         return render(request, 'add_group.html', ctx)
 
-    def post(self, request):
+    def post(self, request, group_id):
         group_form = UserGroupsForm(request.POST)
         if group_form.is_valid():
-            group = Groups.objects.create(name=group_form.cleaned_data['name'])
-            group.save()
+            if group_id:
+                group = Groups.objects.get(pk=group_id)
+                group.name = group_form.cleaned_data['name']
+                group.save()
+            else:
+                group = Groups.objects.create(name=group_form.cleaned_data['name'])
+                group.save()
 
             users = group_form.cleaned_data['users']
             for user in users:
