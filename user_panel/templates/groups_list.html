@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% load extras %}
+    {% block content %}
+
+        <div class="container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Group name</th>
+                <th>Users</th>
+              </tr>
+            </thead>
+
+                <tbody >
+
+                {% for group in groups %}
+
+                  <tr>
+                    <td><a href='/add_user/{{ user.id }}'>{{ group.name }}</a></td>
+                    <td><a href='/add_user/{{ user.id }}'>{{ group.name|user_in_group }}</a></td>
+                  </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+          </table>
+        </div>
+
+    {% endblock content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from .forms import UserForm
+from .forms import UserForm, UserGroupsForm
+from .models import Groups, Profile
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.http import QueryDict
@@ -27,7 +28,7 @@ class UserList(View):
         return redirect('/user_list')
 
 
-class AddUserList(View):
+class AddUser(View):
     def get(self, request, user_id):
         if user_id:
             selected_user = User.objects.get(pk=user_id)
@@ -73,3 +74,40 @@ class AddUserList(View):
             'user_form': user_form,
         }
         return render(request, 'add_user.html', ctx)
+
+
+class GroupsList(View):
+    def get(self, request):
+        groups = Groups.objects.all()
+
+        ctx = {
+            'groups': groups
+        }
+        return render(request, 'groups_list.html', ctx)
+
+
+class AddGroup(View):
+    def get(self, request):
+        group_form = UserGroupsForm()
+
+        ctx = {
+            'group_form': group_form
+        }
+        return render(request, 'add_group.html', ctx)
+
+    def post(self, request):
+        group_form = UserGroupsForm(request.POST)
+        if group_form.is_valid():
+            group = Groups.objects.create(name=group_form.cleaned_data['name'])
+            group.save()
+
+            users = group_form.cleaned_data['users']
+            for user in users:
+                group.users.add(user)
+
+            return redirect('/groups_list')
+
+        ctx = {
+            'group_form': group_form,
+        }
+        return render(request, 'add_group.html', ctx)
