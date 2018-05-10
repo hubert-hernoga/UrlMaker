@@ -42,4 +42,25 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Removing group from list
+    $('.remove-group').click(function () {
+        var current_group = $('.current-group');
+        var group_id = this.id;
+
+        // Removing group from list
+        $.each( current_group, function(index, value) {
+            if (group_id === value.id) {
+                value.remove();
+            }
+        });
+
+        $.ajax({
+            type: "DELETE",
+            url: "/groups_list/",
+            data: {
+                "group_id": group_id
+            }
+        });
+    });
 });

@@ -85,6 +85,12 @@ class GroupsList(View):
         }
         return render(request, 'groups_list.html', ctx)
 
+    def delete(self, request):
+        group_id = QueryDict(request.body).get('group_id')
+        Groups.objects.filter(pk=group_id).delete()
+
+        return redirect('/groups_list')
+
 
 class AddGroup(View):
     def get(self, request):
