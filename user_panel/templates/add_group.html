@@ -3,7 +3,14 @@
 
         <form method="post">
             {%	csrf_token	%}
-            <p>{{ group_form.as_p }}</p>
+            <p>{{ group_form }}</p>
+
+            <div> Members:
+                {% for user in users %}
+                    <li>{{ user }}</li>
+                {% endfor %}
+            </div><br>
+
             <input type='submit' class="btn btn-secondary" value='Add'>
         </form>
 
