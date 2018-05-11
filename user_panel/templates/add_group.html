@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
+{% load extras %}
     {% block content %}
 
         <form method="post">
             {%	csrf_token	%}
             <p>{{ group_form }}</p>
 
-            <div> Members:
-                {% for user in users %}
-                    <li>{{ user }}</li>
-                {% endfor %}
-            </div><br>
+            {% for member in group_member %}
+                <p>{{ member|user_in_group }}</p>
+            {% endfor %}
+
+            {% if users %}
+                <div> Members:
+                    {% for user in users %}
+                        <li>{{ user }}</li>
+                    {% endfor %}
+                </div><br>
+            {% endif %}
 
             <input type='submit' class="btn btn-secondary" value='Add'>
         </form>

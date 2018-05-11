@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Profile, Groups
-from django.contrib.auth.models import User
+from .models import Profile, Group, GroupMember
 from django.core.exceptions import ValidationError
 
 
@@ -15,7 +14,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['username', 'first_name', 'last_name', 'birth_date',
-                  'list_groups', 'password', 'repeat_password']
+                  'password', 'repeat_password']
 
 
     def clean_repeat_password(self):
@@ -26,7 +25,7 @@ class UserForm(forms.ModelForm):
         return password1
 
 
-class UserGroupsForm(ModelForm):
+class GroupForm(ModelForm):
     class Meta:
-        model = Groups
+        model = Group
         fields = ['name', 'users']

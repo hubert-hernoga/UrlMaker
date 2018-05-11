@@ -4,6 +4,15 @@
         <form method="post">
             {%	csrf_token	%}
             <p>{{ user_form.as_p }}</p>
+
+            {% if user_groups %}
+                <div> Belongs to groups:
+                    {% for group in user_groups %}
+                        <li>{{ group }}</li>
+                    {% endfor %}
+                </div><br>
+            {% endif %}
+
             <input type='submit' class="btn btn-secondary" value='Add'>
         </form>
 

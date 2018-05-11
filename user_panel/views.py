@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from .forms import UserForm, UserGroupsForm
-from .models import Groups, Profile
+from .forms import UserForm, GroupForm
+from .models import GroupMember, Group
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.http import QueryDict
@@ -31,17 +31,19 @@ class UserList(View):
 class AddUser(View):
     def get(self, request, user_id):
         if user_id:
+            user_groups = Group.objects.filter(users=user_id)
             selected_user = User.objects.get(pk=user_id)
+
             selected_user_form = UserForm(initial={
                 'username': selected_user.username,
                 'first_name': selected_user.first_name,
                 'last_name': selected_user.last_name,
-                'birth_date': selected_user.profile.birth_date,
-                'list_groups': selected_user.profile.list_groups
+                'birth_date': selected_user.profile.birth_date
             })
 
             ctx = {
-                'user_form': selected_user_form
+                'user_form': selected_user_form,
+                'user_groups': user_groups
             }
         else:
             user_form = UserForm()
@@ -62,10 +64,9 @@ class AddUser(View):
                 user.save()
                 user = User.objects.get(username=user_form.cleaned_data['username'])
 
-            user.first_name=user_form.cleaned_data['first_name']
-            user.last_name=user_form.cleaned_data['last_name']
+            user.first_name = user_form.cleaned_data['first_name']
+            user.last_name = user_form.cleaned_data['last_name']
             user.profile.birth_date = user_form.cleaned_data['birth_date']
-            user.profile.list_groups = user_form.cleaned_data['list_groups']
             user.save()
 
             return redirect('/user_list')
@@ -78,7 +79,7 @@ class AddUser(View):
 
 class GroupsList(View):
     def get(self, request):
-        groups = Groups.objects.all()
+        groups = Group.objects.all()
 
         ctx = {
             'groups': groups
@@ -87,7 +88,7 @@ class GroupsList(View):
 
     def delete(self, request):
         group_id = QueryDict(request.body).get('group_id')
-        Groups.objects.filter(pk=group_id).delete()
+        GroupMember.objects.filter(pk=group_id).delete()
 
         return redirect('/groups_list')
 
@@ -95,8 +96,8 @@ class GroupsList(View):
 class AddGroup(View):
     def get(self, request, group_id):
         if group_id:
-            selected_group = Groups.objects.get(pk=group_id)
-            selected_group_form = UserGroupsForm(initial={
+            selected_group = Group.objects.get(pk=group_id)
+            selected_group_form = GroupForm(initial={
                 'name': selected_group.name,
             })
 
@@ -105,7 +106,7 @@ class AddGroup(View):
                 'users': selected_group.users.all()
             }
         else:
-            group_form = UserGroupsForm()
+            group_form = GroupForm()
 
             ctx = {
                 'group_form': group_form
@@ -113,14 +114,14 @@ class AddGroup(View):
         return render(request, 'add_group.html', ctx)
 
     def post(self, request, group_id):
-        group_form = UserGroupsForm(request.POST)
+        group_form = GroupForm(request.POST)
         if group_form.is_valid():
             if group_id:
-                group = Groups.objects.get(pk=group_id)
+                group = Group.objects.get(pk=group_id)
                 group.name = group_form.cleaned_data['name']
                 group.save()
             else:
-                group = Groups.objects.create(name=group_form.cleaned_data['name'])
+                group = Group.objects.create(name=group_form.cleaned_data['name'])
                 group.save()
 
             users = group_form.cleaned_data['users']
