@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Profile, Group, GroupMember
+from .models import Profile, Group
 from django.core.exceptions import ValidationError
 
 

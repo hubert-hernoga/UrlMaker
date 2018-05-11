@@ -4,21 +4,21 @@
 
         <form method="post">
             {%	csrf_token	%}
-            <p>{{ group_form }}</p>
+                <p>{{ group_form }}</p>
 
-            {% for member in group_member %}
-                <p>{{ member|user_in_group }}</p>
-            {% endfor %}
+                {% for member in group_member %}
+                    <p>{{ member|user_in_group }}</p>
+                {% endfor %}
 
-            {% if users %}
-                <div> Members:
-                    {% for user in users %}
-                        <li>{{ user }}</li>
-                    {% endfor %}
-                </div><br>
-            {% endif %}
+                {% if users %}
+                    <div> Members:
+                        {% for user in users %}
+                            <li>{{ user }}</li>
+                        {% endfor %}
+                    </div><br>
+                {% endif %}
 
-            <input type='submit' class="btn btn-secondary" value='Add'>
+                <input type='submit' class="btn btn-secondary" value='Add'>
         </form>
 
     {% endblock content %}

@@ -1,9 +1,11 @@
-from django.shortcuts import render
 from django.views import View
-from .forms import UserForm, GroupForm
-from .models import GroupMember, Group
-from django.shortcuts import redirect
+from django.shortcuts import render
+
 from django.contrib.auth.models import User
+from .forms import UserForm, GroupForm
+from .models import Group
+
+from django.shortcuts import redirect
 from django.http import QueryDict
 
 
@@ -88,7 +90,7 @@ class GroupsList(View):
 
     def delete(self, request):
         group_id = QueryDict(request.body).get('group_id')
-        GroupMember.objects.filter(pk=group_id).delete()
+        Group.objects.filter(pk=group_id).delete()
 
         return redirect('/groups_list')
 
