@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Profile, Group
 from django.core.exceptions import ValidationError
-
+from .validators import email_validator
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username' }))
@@ -26,6 +26,16 @@ class UserForm(forms.ModelForm):
         elif not username.isalpha():
             raise ValidationError("Only alphanumeric characters are allowed.")
         return username
+
+    def clean_email(self):
+        user_email = self.cleaned_data['email']
+
+        if not user_email:
+            raise forms.ValidationError('The field can not be empty')
+        elif self.logged_user_id:
+            logged_email = User.objects.get(pk=self.logged_user_id).email
+            return email_validator(user_email, logged_email)
+        return email_validator(user_email)
 
     def clean_repeat_password(self):
         password1 = self.cleaned_data['password']
