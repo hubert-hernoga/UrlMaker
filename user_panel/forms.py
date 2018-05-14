@@ -10,8 +10,8 @@ class UserForm(forms.ModelForm):
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'first_name'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'last_name'}))
     email = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'e-mail'}))
-    password = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'password'}))
-    repeat_password = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'repeat_password'}))
+    password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'password'}))
+    repeat_password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'repeat_password'}))
 
     class Meta:
         model = Profile
