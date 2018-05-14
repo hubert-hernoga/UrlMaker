@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username' }))
+    username = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username' }))
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'first_name'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'last_name'}))
     e_mail = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'e-mail'}))
@@ -17,6 +17,15 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'e_mail', 'birth_date',
                   'password', 'repeat_password']
 
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+
+        if not username:
+            raise forms.ValidationError('The field can not be empty')
+        elif not username.isalpha():
+            raise ValidationError("Only alphanumeric characters are allowed.")
+        return username
 
     def clean_repeat_password(self):
         password1 = self.cleaned_data['password']
