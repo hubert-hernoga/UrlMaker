@@ -5,10 +5,12 @@ from .models import Profile, Group
 from django.core.exceptions import ValidationError
 from .validators import email_validator
 
+
 class UserForm(forms.ModelForm):
     username = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username' }))
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'first_name'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'last_name'}))
+    birth_date = forms.DateField(required=False, widget=forms.TextInput(attrs={'class': 'form-control ', 'id': 'birth_date', 'placeholder': 'YYYY-MM-DD'}))
     email = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'e-mail'}))
     password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'password'}))
     repeat_password = forms.CharField(required=False, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'repeat_password'}))
