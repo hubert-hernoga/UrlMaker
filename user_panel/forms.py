@@ -5,15 +5,16 @@ from django.core.exceptions import ValidationError
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput)
-    first_name = forms.CharField(widget=forms.TextInput)
-    last_name = forms.CharField(widget=forms.TextInput)
-    password = forms.CharField(widget=forms.PasswordInput())
-    repeat_password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username' }))
+    first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'first_name'}))
+    last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'last_name'}))
+    e_mail = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'e-mail'}))
+    password = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'password'}))
+    repeat_password = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'repeat_password'}))
 
     class Meta:
         model = Profile
-        fields = ['username', 'first_name', 'last_name', 'birth_date',
+        fields = ['username', 'first_name', 'last_name', 'e_mail', 'birth_date',
                   'password', 'repeat_password']
 
 
