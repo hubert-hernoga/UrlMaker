@@ -11,7 +11,7 @@ from django.http import QueryDict
 
 class MainPage(View):
     def get(self, request):
-        return render(request, 'main_page.html')
+        return render(request, 'user_list.html')
 
 
 class UserList(View):
@@ -27,7 +27,7 @@ class UserList(View):
         user_id = QueryDict(request.body).get('user_id')
         User.objects.filter(pk=user_id).delete()
 
-        return redirect('/user_list')
+        return redirect('/')
 
 
 class AddUser(View):

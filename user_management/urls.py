@@ -21,8 +21,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('^$', MainPage.as_view(), name='main_page'),
-    url('user_list/', UserList.as_view(), name='user_list'),
+    url('^$', UserList.as_view(), name='user_list'),
     url('add_user/(?P<user_id>(\d)+|)', AddUser.as_view(), name='add_user'),
     url('add_group/(?P<group_id>(\d)+|)', AddGroup.as_view(), name='add_group'),
     url('groups_list/', GroupsList.as_view(), name='groups_list')

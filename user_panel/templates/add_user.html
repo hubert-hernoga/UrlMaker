@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
     {% block content %}
 
-        <form method="post">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Register an Account</div>
+      <div class="card-body">
+              <form method="post">
             {%	csrf_token	%}
-                <p>{{ user_form.as_p }}</p>
 
-                {% if user_groups %}
-                    <div> Belongs to groups:
-                        {% for group in user_groups %}
-                            <li>{{ group }}</li>
-                        {% endfor %}
-                    </div><br>
-                {% endif %}
+             <div class="form-group">
+                <div class="row">
+                    {% for field in user_form %}
 
-                <input type='submit' class="btn btn-secondary" value='Add'>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }} {{ field.errors }}
+                            </div>
+                          </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+          <input type='submit' class="btn btn-primary btn-block" value='Register'>
         </form>
+      </div>
+    </div>
 
     {% endblock content %}
+
+
+
