@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.forms import ModelForm
 from .models import Profile, Group
 from django.core.exceptions import ValidationError
@@ -8,13 +9,13 @@ class UserForm(forms.ModelForm):
     username = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username' }))
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'first_name'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'last_name'}))
-    e_mail = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'e-mail'}))
+    email = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'e-mail'}))
     password = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'password'}))
     repeat_password = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'repeat_password'}))
 
     class Meta:
         model = Profile
-        fields = ['username', 'first_name', 'last_name', 'e_mail', 'birth_date',
+        fields = ['username', 'first_name', 'last_name', 'email', 'birth_date',
                   'password', 'repeat_password']
 
 
@@ -25,6 +26,8 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError('The field can not be empty')
         elif not username.isalpha():
             raise ValidationError("Only alphanumeric characters are allowed.")
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("Username: {} already exist!".format(username))
         return username
 
     def clean_first_name(self):
@@ -50,9 +53,6 @@ class UserForm(forms.ModelForm):
 
         if not user_email:
             raise forms.ValidationError('The field can not be empty')
-        elif self.logged_user_id:
-            logged_email = User.objects.get(pk=self.logged_user_id).email
-            return email_validator(user_email, logged_email)
         return email_validator(user_email)
 
     def clean_repeat_password(self):
