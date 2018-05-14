@@ -27,6 +27,24 @@ class UserForm(forms.ModelForm):
             raise ValidationError("Only alphanumeric characters are allowed.")
         return username
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+
+        if not first_name:
+            raise forms.ValidationError('The field can not be empty')
+        elif not first_name.isalpha():
+            raise ValidationError("Only alphanumeric characters are allowed.")
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+
+        if not last_name:
+            raise forms.ValidationError('The field can not be empty')
+        elif not last_name.isalpha():
+            raise ValidationError("Only alphanumeric characters are allowed.")
+        return last_name
+
     def clean_email(self):
         user_email = self.cleaned_data['email']
 
