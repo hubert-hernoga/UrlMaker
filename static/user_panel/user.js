@@ -21,16 +21,17 @@ $(document).ready(function() {
         });
     });
 
-
     // Removing user from list
     $('.remove-user').click(function () {
         var current_user = $('.current-user');
         var user_id = this.id;
 
+        var quantity_users = $('.quantity-users');
+
         // Removing user from list
         $.each( current_user, function(index, value) {
-            console.log(user_id)
             if (user_id === value.id) {
+                quantity_users.text(parseInt(quantity_users.text()) - 1);
                 value.remove();
             }
         });
@@ -43,15 +44,18 @@ $(document).ready(function() {
             }
         });
     });
-    console.log('sdads')
+
     // Removing group from list
     $('.remove-group').click(function () {
         var current_group = $('.current-group');
         var group_id = this.id;
 
+        var quantity_groups = $('.quantity-groups');
+
         // Removing group from list
         $.each( current_group, function(index, value) {
             if (group_id === value.id) {
+                quantity_groups.text(parseInt(quantity_groups.text()) - 1);
                 value.remove();
             }
         });
@@ -64,4 +68,7 @@ $(document).ready(function() {
             }
         });
     });
+
+
+
 });

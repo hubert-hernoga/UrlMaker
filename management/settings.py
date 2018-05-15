@@ -79,25 +79,34 @@ WSGI_APPLICATION = 'management.wsgi.application'
 
 # DATABASES = { 'default': dj_database_url.config() }
 
-env = os.environ.copy()
-db_url = env.get('DATABASE_URL', False)
+# env = os.environ.copy()
+# db_url = env.get('DATABASE_URL', False)
+#
+# if db_url != False:
+#     import dj_database_url
+#     DATABASES = {'default': dj_database_url.config(default='postgres://qjcztbwrwslrkp:e883440a784d31de5745aeb0045a1aceb83483a58ddb04c696281e574fc01d55@ec2-50-19-232-205.compute-1.amazonaws.com:5432/d266qdcqs1eoql')}
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'd266qdcqs1eoql',
+#             'USER': 'qjcztbwrwslrkp',
+#             'PASSWORD': 'e883440a784d31de5745aeb0045a1aceb83483a58ddb04c696281e574fc01d55',
+#             'HOST': 'ec2-50-19-232-205.compute-1.amazonaws.com',
+#             'PORT': '5432',
+#         }
+#     }
 
-if db_url != False:
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config(default='postgres://qjcztbwrwslrkp:e883440a784d31de5745aeb0045a1aceb83483a58ddb04c696281e574fc01d55@ec2-50-19-232-205.compute-1.amazonaws.com:5432/d266qdcqs1eoql')}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd266qdcqs1eoql',
-            'USER': 'qjcztbwrwslrkp',
-            'PASSWORD': 'e883440a784d31de5745aeb0045a1aceb83483a58ddb04c696281e574fc01d55',
-            'HOST': 'ec2-50-19-232-205.compute-1.amazonaws.com',
-            'PORT': '5432',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_management',
+        'USER': 'root',
+        'PASSWORD': 'coderslab',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
-
-
+}
 
 
 # Password validation
