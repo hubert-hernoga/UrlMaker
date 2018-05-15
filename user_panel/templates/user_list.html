@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load extras %}
     {% block content %}
 
           <!-- Icon Cards-->
@@ -22,11 +23,11 @@
             </div>
             <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white bg-warning o-hidden h-100">
-                <a class="card-body text-white clearfix z-1" href="/groups_list">
+                <a class="card-body text-white clearfix z-1" href="/">
                   <div class="card-body-icon">
                     <i class="fa fa-fw fa-list"></i>
                   </div>
-                  <div class="mr-5">{{ groups.count }} Groups</div>
+                  <div class="mr-5">11 Groups</div>
                 </a>
                 <a class="card-footer text-white clearfix small z-1" href="/add_group">
                   <span class="float-left">Add new group</span>
@@ -44,6 +45,7 @@
               <i class="fa fa-table"></i> Users list</div>
             <div class="card-body">
               <div class="table-responsive">
+
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -53,6 +55,7 @@
                         <th>E-mail</th>
                         <th>Birth date</th>
                         <th>Date joined</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -65,6 +68,20 @@
                       <td>{{ user.first_name }}</td>
                       <td>{{ user.last_name }}</td>
                       <td>{{ user.email }}</td>
+                      <td>
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#{{ user }}" aria-expanded="true" aria-controls="collapseOne">
+                              Groups
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="{{ user }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                           {{ groups|user_groups:user }}
+                          </div>
+                        </div>
+                      </td>
                       <td>{{ user.profile.birth_date }}</td>
                       <td>{{ user.date_joined }}</td>
                       <td>
