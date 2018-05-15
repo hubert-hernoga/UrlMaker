@@ -25,8 +25,6 @@ class UserForm(forms.ModelForm):
 
         if not username:
             raise forms.ValidationError('The field can not be empty')
-        elif not username.isalpha():
-            raise ValidationError("Only alphanumeric characters are allowed.")
         if User.objects.filter(username=username).exists():
             raise ValidationError("Username: {} already exist!".format(username))
         return username
