@@ -23,7 +23,7 @@
             </div>
             <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white bg-warning o-hidden h-100">
-                <a class="card-body text-white clearfix z-1" href="/">
+                <a class="card-body text-white clearfix z-1" href="/groups_list">
                   <div class="card-body-icon">
                     <i class="fa fa-fw fa-list"></i>
                   </div>
@@ -49,7 +49,7 @@
                   <thead>
                     <tr>
                         <th>Group name</th>
-                        <th>Users</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -59,7 +59,20 @@
 
                     <tr id="{{ group.id }}" class="current-group">
                       <td>{{ group.name }}</td>
-                      <td>{{ group.name|user_in_group }}</td>
+                      <td>
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#{{ group }}" aria-expanded="true" aria-controls="collapseOne">
+                              Users
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="{{ group }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body">
+                           {{ group.name|user_in_group }}
+                          </div>
+                        </div>
+                      </td>
                       <td>
                           <button type="button" id="{{ group.id }}" class="close remove-group" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
