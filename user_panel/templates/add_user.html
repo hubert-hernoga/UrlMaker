@@ -2,48 +2,71 @@
     {% block content %}
 
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Register an Account</div>
-      <div class="card-body">
+
+        {% if user_groups %}
+
+          <div class="card-header">Change data for {{ user_form.username.value }}</div>
+          <div class="card-body">
+              <form method="post">
+                {%	csrf_token	%}
+
+                 <div class="form-group">
+                    <div class="row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Belongs to groups</label>
+                          <select class="form-control">
+                              {% for group in user_groups %}
+
+                                <option>{{ group }}</option>
+
+                              {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                        {% for field in user_form %}
+
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {{ field }} {{ field.errors }}
+                                </div>
+                              </div>
+
+                        {% endfor %}
+                    </div>
+                  </div>
+              <input type='submit' class="btn btn-primary btn-block" value='Change'>
+            </form>
+          </div>
+
+        {% else %}
+
+          <div class="card-header">Register an Account</div>
+          <div class="card-body">
               <form method="post">
             {%	csrf_token	%}
 
-             <div class="form-group">
-                <div class="row">
+                 <div class="form-group">
+                    <div class="row">
+                        {% for field in user_form %}
 
-                    {% if user_groups %}
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                    {{ field }} {{ field.errors }}
+                                </div>
+                              </div>
 
-                         <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Belongs to groups</label>
-                              <select class="form-control">
-                                  {% for group in user_groups %}
+                        {% endfor %}
+                    </div>
+                  </div>
+                <input type='submit' class="btn btn-primary btn-block" value='Register'>
+            </form>
+          </div>
 
-                                    <option>{{ group }}</option>
+         {% endif %}
 
-                                  {% endfor %}
-                              </select>
-                            </div>
-                          </div>
-
-                    {% endif %}
-
-                    {% for field in user_form %}
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {{ field }} {{ field.errors }}
-                            </div>
-                          </div>
-
-                    {% endfor %}
-
-                </div>
-            </div>
-
-          <input type='submit' class="btn btn-primary btn-block" value='Register'>
-        </form>
-      </div>
     </div>
 
     {% endblock content %}

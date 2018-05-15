@@ -110,7 +110,7 @@ class AddGroup(View):
             })
 
             ctx = {
-                'group_form': selected_group_form['name'],
+                'group_form': selected_group_form,
                 'users': selected_group.users.all()
             }
         else:
