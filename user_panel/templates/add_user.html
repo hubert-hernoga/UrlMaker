@@ -9,6 +9,24 @@
 
              <div class="form-group">
                 <div class="row">
+
+                    {% if user_groups %}
+
+                         <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Belongs to groups</label>
+                              <select class="form-control">
+                                  {% for group in user_groups %}
+
+                                    <option>{{ group }}</option>
+
+                                  {% endfor %}
+                              </select>
+                            </div>
+                          </div>
+
+                    {% endif %}
+
                     {% for field in user_form %}
 
                           <div class="col-sm-6">
@@ -19,6 +37,7 @@
                           </div>
 
                     {% endfor %}
+
                 </div>
             </div>
 
