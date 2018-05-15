@@ -17,9 +17,11 @@ class MainPage(View):
 class UserList(View):
     def get(self, request):
         users = User.objects.all()
+        groups = Group.objects.all()
 
         ctx = {
-            'users': users
+            'users': users,
+            'groups': groups
         }
         return render(request, 'user_list.html', ctx)
 
@@ -84,9 +86,11 @@ class AddUser(View):
 class GroupsList(View):
     def get(self, request):
         groups = Group.objects.all()
+        users = User.objects.all()
 
         ctx = {
-            'groups': groups
+            'groups': groups,
+            'users': users
         }
         return render(request, 'groups_list.html', ctx)
 

@@ -3,34 +3,82 @@
 {% load extras %}
     {% block content %}
 
-        <div class="container">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Group name</th>
-                <th>Users</th>
-              </tr>
-            </thead>
-                <tbody >
-                    {% for group in groups %}
+          <!-- Icon Cards-->
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100">
+                <a class="card-body text-white clearfix z-1" href="/">
+                  <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                  </div>
+                  <div class="mr-5">{{ users.count }} Users</div>
+                </a>
+                <a class="card-footer text-white clearfix small z-1" href="/add_user">
+                  <span class="float-left">Add new user</span>
+                  <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-warning o-hidden h-100">
+                <a class="card-body text-white clearfix z-1" href="/">
+                  <div class="card-body-icon">
+                    <i class="fa fa-fw fa-list"></i>
+                  </div>
+                  <div class="mr-5">{{ groups.count }} Groups</div>
+                </a>
+                <a class="card-footer text-white clearfix small z-1" href="/add_group">
+                  <span class="float-left">Add new group</span>
+                  <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
 
-                      <tr id="{{ group.id }}" class="current-group">
-                        <td><a href='/add_group/{{ group.id }}'>{{ group.name }}</a></td>
-                        <td><a href='/add_group/{{ group.id }}'>{{ group.name|user_in_group }}</a></td>
-                        <td>
-                            <button id="{{ group.id }}" type="button" class="close remove-group" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </td>
-                      </tr>
+          <!-- Example DataTables Card-->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-table"></i> Groups list</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Group name</th>
+                        <th>Users</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for group in groups %}
 
-                    {% endfor %}
-                </tbody>
-          </table>
+                    <tr id="{{ group.id }}" class="current-group">
+                      <td>{{ group.name }}</td>
+                      <td>{{ group.name|user_in_group }}</td>
+                      <td>
+                          <button type="button" id="{{ group.id }}" class="close remove-group" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </td>
+                      <td>
+                          <form action="/add_group/{{ group.id }}">
+                            <button type="submit" class="btn-info">Edit</button>
+                          </form>
+                      </td>
+                    </tr>
 
-          <p class="lead">
-            <a href="/add_group" class="btn btn-secondary">Add group</a>
-          </p>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">We have {{ users.count }} users and {{ groups.count }} groups</div>
+          </div>
         </div>
 
     {% endblock content %}

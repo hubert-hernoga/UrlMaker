@@ -2,23 +2,28 @@
 {% load extras %}
     {% block content %}
 
-        <form method="post">
-            {%	csrf_token	%}
-                <p>{{ group_form }}</p>
+        <div class="card card-register mx-auto mt-5">
+          <div class="card-header">Create group</div>
+          <div class="card-body">
+            <form method="post">
+                {%	csrf_token	%}
 
-                {% for member in group_member %}
-                    <p>{{ member|user_in_group }}</p>
-                {% endfor %}
+                 <div class="form-group">
+                    {% for field in group_form %}
 
-                {% if users %}
-                    <div> Members:
-                        {% for user in users %}
-                            <li>{{ user }}</li>
-                        {% endfor %}
-                    </div><br>
-                {% endif %}
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                {{ field }} {{ field.errors }}
+                            </div>
+                          </div>
 
-                <input type='submit' class="btn btn-secondary" value='Add'>
-        </form>
+                    {% endfor %}
+                </div>
+
+              <input type='submit' class="btn btn-primary btn-block" value='Add new group'>
+            </form>
+          </div>
+        </div>
 
     {% endblock content %}
