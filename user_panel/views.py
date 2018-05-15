@@ -40,6 +40,7 @@ class AddUser(View):
                 'username': selected_user.username,
                 'first_name': selected_user.first_name,
                 'last_name': selected_user.last_name,
+                'email': selected_user.email,
                 'birth_date': selected_user.profile.birth_date
             })
 
