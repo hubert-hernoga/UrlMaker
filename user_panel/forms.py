@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 from .models import Profile, Group
 from django.core.exceptions import ValidationError
 from .validators import email_validator
@@ -50,6 +49,14 @@ class UserForm(forms.ModelForm):
             raise ValidationError("Only alphanumeric characters are allowed.")
         return last_name
 
+    def clean_birth_date(self):
+        birth_date = self.cleaned_data['birth_date']
+
+        if not birth_date:
+            raise forms.ValidationError('The field can not be empty')
+        return birth_date
+
+
     def clean_email(self):
         user_email = self.cleaned_data['email']
 
@@ -60,12 +67,26 @@ class UserForm(forms.ModelForm):
     def clean_repeat_password(self):
         password1 = self.cleaned_data['password']
         password2 = self.cleaned_data['repeat_password']
+        if not password1:
+            raise forms.ValidationError('The field can not be empty')
+        if not password2:
+            raise forms.ValidationError('The field can not be empty')
         if password1 != password2:
             raise ValidationError("Passwords should be identical.")
         return password1
 
 
-class GroupForm(ModelForm):
+class GroupForm(forms.ModelForm):
+    name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'name'}))
+    users = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(), queryset=User.objects.all())
+
     class Meta:
         model = Group
         fields = ['name', 'users']
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+
+        if not name:
+            raise forms.ValidationError('The field can not be empty')
+        return name
