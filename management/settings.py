@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import dj_database_url
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,20 +77,25 @@ WSGI_APPLICATION = 'management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-#
-# DATABASES = { 'default': dj_database_url.config() }
-#
+env = os.environ.copy()
+db_url = env.get('DATABASE_URL', False)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user_management',
-        'USER': 'root',
-        'PASSWORD': 'coderslab',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+if db_url != False:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config(default=os.environ['USER_MANAGEMENT_DB'])}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'user_management',
+            'USER': 'root',
+            'PASSWORD': os.environ['USER_MANAGEMENT_PSWD'],
+            'HOST': os.environ['USER_MANAGEMENT_USR'],
+            'PORT': '3306',
+        }
     }
-}
+
+
 
 
 # Password validation
