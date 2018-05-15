@@ -1,4 +1,4 @@
-#!/home/hubert/Projects/user_management/myenv/bin/python
+#!/home/hubert/Projects/management/myenv/bin/python
 
 import sys
 import getopt
