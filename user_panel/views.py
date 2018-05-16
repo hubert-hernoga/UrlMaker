@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User
 from .forms import UserForm, GroupForm
-from .models import Group, Profile
+from .models import Group
 
 from django.shortcuts import redirect
 from django.http import QueryDict
@@ -64,7 +64,6 @@ class AddUser(View):
                 user.save()
                 user = User.objects.get(username=user_form.cleaned_data['username'])
 
-            user.email = user_form.cleaned_data['email']
             user.first_name = user_form.cleaned_data['first_name']
             user.last_name = user_form.cleaned_data['last_name']
             user.profile.birth_date = user_form.cleaned_data['birth_date']
