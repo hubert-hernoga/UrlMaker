@@ -26,7 +26,7 @@ SECRET_KEY = ')7!ibew*4+(&ezv^aqsmol!e8&jo#-ilh8)b45l2(wru%cd9s-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['user-management-.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -77,36 +77,36 @@ WSGI_APPLICATION = 'management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = { 'default': dj_database_url.config() }
+DATABASES = { 'default': dj_database_url.config() }
 
-# env = os.environ.copy()
-# db_url = env.get('DATABASE_URL', False)
-#
-# if db_url != False:
-#     import dj_database_url
-#     DATABASES = {'default': dj_database_url.config(default='postgres://qjcztbwrwslrkp:e883440a784d31de5745aeb0045a1aceb83483a58ddb04c696281e574fc01d55@ec2-50-19-232-205.compute-1.amazonaws.com:5432/d266qdcqs1eoql')}
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'd266qdcqs1eoql',
-#             'USER': 'qjcztbwrwslrkp',
-#             'PASSWORD': 'e883440a784d31de5745aeb0045a1aceb83483a58ddb04c696281e574fc01d55',
-#             'HOST': 'ec2-50-19-232-205.compute-1.amazonaws.com',
-#             'PORT': '5432',
-#         }
-#     }
+env = os.environ.copy()
+db_url = env.get('DATABASE_URL', False)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'user_management',
-        'USER': 'root',
-        'PASSWORD': 'coderslab',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+if db_url != False:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config(default='postgres://ylqzeacxzzkvfn:2d9194b956096c0011feda1a22c2f7740244d569d2b817061ac90e4de3155239@ec2-50-19-224-165.compute-1.amazonaws.com:5432/dakpl0oqbg40h4')}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dakpl0oqbg40h4',
+            'USER': 'ylqzeacxzzkvfn',
+            'PASSWORD': '2d9194b956096c0011feda1a22c2f7740244d569d2b817061ac90e4de3155239',
+            'HOST': 'ec2-50-19-224-165.compute-1.amazonaws.com',
+            'PORT': '5432',
+        }
     }
-}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'user_management',
+#         'USER': 'root',
+#         'PASSWORD': 'coderslab',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # Password validation
