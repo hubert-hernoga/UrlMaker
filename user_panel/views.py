@@ -9,11 +9,6 @@ from django.shortcuts import redirect
 from django.http import QueryDict
 
 
-class MainPage(View):
-    def get(self, request):
-        return render(request, 'user_list.html')
-
-
 class UserList(View):
     def get(self, request):
         users = User.objects.all()

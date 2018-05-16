@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user_panel.views import MainPage, UserList, AddUser, GroupsList, AddGroup
+from user_panel.views import UserList, AddUser, GroupsList, AddGroup
 from django.conf.urls import url
 
 
