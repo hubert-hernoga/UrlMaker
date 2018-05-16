@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User
 from .forms import UserForm, GroupForm
-from .models import Group
+from .models import Group, Profile
 
 from django.shortcuts import redirect
 from django.http import QueryDict
@@ -27,7 +27,7 @@ class UserList(View):
 
     def delete(self, request):
         user_id = QueryDict(request.body).get('user_id')
-        User.objects.filter(pk=user_id).delete()
+        User.objects.get(pk=user_id).delete()
 
         return redirect('/')
 
