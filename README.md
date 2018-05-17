@@ -1,4 +1,4 @@
-#  User management
+#  User management // [Open application](https://user-management-a.herokuapp.com/)
 Application for managing users:
 - displaying the list of users,
 - displaying the list of groups,
