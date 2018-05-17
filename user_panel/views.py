@@ -33,7 +33,8 @@ class AddUser(View):
             user_groups = Group.objects.filter(users=user_id)
             selected_user = User.objects.get(pk=user_id)
 
-            selected_user_form = UserForm(initial={
+            selected_user_form = UserForm(user_id=user_id,
+                                          initial={
                 'username': selected_user.username,
                 'first_name': selected_user.first_name,
                 'last_name': selected_user.last_name,
@@ -46,7 +47,7 @@ class AddUser(View):
                 'user_groups': user_groups
             }
         else:
-            user_form = UserForm()
+            user_form = UserForm(user_id=user_id)
 
             ctx = {
                 'user_form': user_form
@@ -54,7 +55,7 @@ class AddUser(View):
         return render(request, 'add_user.html', ctx)
 
     def post(self, request, user_id):
-        user_form = UserForm(request.POST)
+        user_form = UserForm(request.POST or None, user_id=user_id)
         if user_form.is_valid():
             if user_id:
                 user = User.objects.get(pk=user_id)

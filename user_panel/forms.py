@@ -19,6 +19,10 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'birth_date',
                   'password', 'repeat_password']
 
+    def __init__(self, *args, **kwargs):
+        if 'user_id' in kwargs.keys():
+            self.editing_user_id = kwargs.pop('user_id')
+            super(UserForm, self).__init__(*args, **kwargs)
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -60,6 +64,9 @@ class UserForm(forms.ModelForm):
 
         if not user_email:
             raise forms.ValidationError('The field can not be empty')
+        elif self.editing_user_id:
+            editing_email = User.objects.get(pk=self.editing_user_id).email
+            return email_validator(user_email, editing_email)
         return email_validator(user_email)
 
     def clean_repeat_password(self):
