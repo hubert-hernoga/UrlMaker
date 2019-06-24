@@ -11,7 +11,7 @@
                   <div class="card-body-icon">
                     <i class="fa fa-fw fa-comments"></i>
                   </div>
-                  <div class="mr-5">{{ users.count }}</div><span>Users</span>
+
                 </a>
                 <a class="card-footer text-white clearfix small z-1" href="/add_user">
                   <span class="float-left">Add new user</span>
@@ -74,12 +74,12 @@
                         </div>
                       </td>
                       <td>
-                          <button type="button" id="{{ group.id }}" class="close remove-group" aria-label="Close">
+                          <button type="button" id="{{ group }}" class="close remove-group" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                       </td>
                       <td>
-                          <form action="/add_group/{{ group.id }}">
+                          <form action="/add_group/{{ group }}">
                             <button type="submit" class="btn-info">Edit</button>
                           </form>
                       </td>

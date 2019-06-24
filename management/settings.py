@@ -82,20 +82,20 @@ WSGI_APPLICATION = 'management.wsgi.application'
 env = os.environ.copy()
 db_url = env.get('DATABASE_URL', False)
 
-# if db_url != False:
-#     import dj_database_url
-#     DATABASES = {'default': dj_database_url.config(default='postgres://ntiooriqitxelj:9a477ac3a8bdbdb3dd2c1d0b7645ce2a50ae7ddf416e68798259dd9f945c8eae@ec2-54-225-107-174.compute-1.amazonaws.com:5432/d2htjiivka87p4')}
-# else:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd9vc6f348akak9',
-        'USER': 'ukhjrbpmikksxr',
-        'PASSWORD': '3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4',
-        'HOST': 'ec2-54-247-189-1.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+if db_url != False:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config(default='postgres://ukhjrbpmikksxr:3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4@ec2-54-247-189-1.eu-west-1.compute.amazonaws.com:5432/d9vc6f348akak9')}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'd9vc6f348akak9',
+            'USER': 'ukhjrbpmikksxr',
+            'PASSWORD': '3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4',
+            'HOST': 'ec2-54-247-189-1.eu-west-1.compute.amazonaws.com',
+            'PORT': '5432',
+        }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
