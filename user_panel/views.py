@@ -2,8 +2,8 @@ from django.views import View
 from django.shortcuts import render
 
 from django.contrib.auth.models import User
-from .forms import UserForm, GroupForm
-from .models import Group
+from .forms import UserForm, UrlForm
+from .models import Url
 
 from django.shortcuts import redirect
 from django.http import QueryDict
@@ -77,28 +77,26 @@ from django.http import QueryDict
 #         }
 #         return render(request, 'add_user.html', ctx)
 #
-#
-# class GroupsList(View):
-#     def get(self, request):
-#         groups = Group.objects.all()
-#         users = User.objects.all()
-#
-#         ctx = {
-#             'groups': groups,
-#             'users': users
-#         }
-#         return render(request, 'groups_list.html', ctx)
-#
-#     def delete(self, request):
-#         group_id = QueryDict(request.body).get('group_id')
-#         Group.objects.filter(pk=group_id).delete()
-#
-#         return redirect('/groups_list')
-#
+
+class GroupsList(View):
+    def get(self, request):
+        groups = Url.objects.all()
+
+        ctx = {
+            'groups': groups
+        }
+        return render(request, 'groups_list.html', ctx)
+
+    def delete(self, request):
+        group_id = QueryDict(request.body).get('group_id')
+        Url.objects.filter(pk=group_id).delete()
+
+        return redirect('/groups_list')
+
 
 class UrlMaker(View):
     def get(self, request):
-        group_form = GroupForm()
+        group_form = UrlForm()
 
         ctx = {
             'group_form': group_form
@@ -106,23 +104,19 @@ class UrlMaker(View):
         return render(request, 'add_group.html', ctx)
 
     def post(self, request):
-        group_form = GroupForm(request.POST)
+        group_form = UrlForm(request.POST)
         print("===================")
 
         if group_form.is_valid():
             url = group_form.cleaned_data['url']
 
-            if group_id:
-                group = Group.objects.get(pk=group_id)
-                group.url = group_form.cleaned_data['url']
-                group.save()
-            else:
-                group = Group.objects.create(name=group_form.cleaned_data['url'])
-                group.save()
-
-            users = group_form.cleaned_data['users']
-            for user in users:
-                group.users.add(user)
+            # if group_id:
+            #     group = Url.objects.get(pk=group_id)
+            #     group.url = group_form.cleaned_data['url']
+            #     group.save()
+            # else:
+            group = Url.objects.create(url=url)
+            group.save()
 
             return redirect('/groups_list')
 

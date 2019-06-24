@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user_panel.views import UrlMaker
+from user_panel.views import UrlMaker, GroupsList
 from django.conf.urls import url
 
 
@@ -24,5 +24,5 @@ urlpatterns = [
     # url('^$', UserList.as_view(), name='user_list'),
     # url('add_user/(?P<user_id>(\d)+|)', AddUser.as_view(), name='add_user'),
     url('url_maker', UrlMaker.as_view(), name='url_maker'),
-    # url('groups_list/', GroupsList.as_view(), name='groups_list')
+    url('groups_list/', GroupsList.as_view(), name='groups_list')
 ]

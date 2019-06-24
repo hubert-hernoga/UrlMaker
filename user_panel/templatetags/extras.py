@@ -1,11 +1,11 @@
 from django import template
-from ..models import Group
+from ..models import Url
 
 register = template.Library()
 
 @register.filter(name='user_in_group')
 def user_in_group(name_group):
-    group = Group.objects.get(name=name_group)
+    group = Url.objects.get(name=name_group)
     users = group.users.all()
 
     return ", ".join([str(user) for user in users])
