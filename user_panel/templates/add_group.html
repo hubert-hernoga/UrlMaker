@@ -4,44 +4,7 @@
 
         <div class="card card-register mx-auto mt-5">
 
-            {% if users %}
-
-              <div class="card-header">Change data for {{ group_form.name.value }}</div>
-              <div class="card-body">
-                  <form method="post">
-                    {%	csrf_token	%}
-
-                         <div class="form-group">
-                             <div class="col-md-6">
-                                <div class="form-group">
-                                  <label>Members</label>
-                                  <select class="form-control">
-                                      {% for user in users %}
-
-                                        <option>{{ user }}</option>
-
-                                      {% endfor %}
-                                  </select>
-                                </div>
-                              </div>
-                            {% for field in group_form %}
-
-                              <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                    {{ field }} {{ field.errors }}
-                                </div>
-                              </div>
-
-                            {% endfor %}
-                        </div>
-                    <input type='submit' class="btn btn-primary btn-block" value='Change'>
-                </form>
-              </div>
-
-            {% else %}
-
-              <div class="card-header">Create group</div>
+              <div class="card-header">Shorten your url</div>
               <div class="card-body">
                   <form method="post">
                     {%	csrf_token	%}
@@ -51,18 +14,18 @@
 
                                   <div class="col-sm-6">
                                     <div class="form-group">
-                                      <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                      <label>{{ field.label }}:</label>
                                         {{ field }} {{ field.errors }}
                                     </div>
                                   </div>
 
                             {% endfor %}
                         </div>
-                    <input type='submit' class="btn btn-primary btn-block" value='Register'>
+                    <input type='submit' class="btn btn-primary btn-block" value='Accept'>
                 </form>
               </div>
 
-            {% endif %}
+
 
         </div>
     {% endblock content %}

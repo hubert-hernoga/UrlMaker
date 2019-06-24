@@ -26,7 +26,7 @@ SECRET_KEY = ')7!ibew*4+(&ezv^aqsmol!e8&jo#-ilh8)b45l2(wru%cd9s-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['user-management-a.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['url-maker-v1.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -82,35 +82,20 @@ WSGI_APPLICATION = 'management.wsgi.application'
 env = os.environ.copy()
 db_url = env.get('DATABASE_URL', False)
 
-if db_url != False:
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config(default='postgres://ylqzeacxzzkvfn:2d9194b956096c0011feda1a22c2f7740244d569d2b817061ac90e4de3155239@ec2-50-19-224-165.compute-1.amazonaws.com:5432/dakpl0oqbg40h4')}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dakpl0oqbg40h4',
-            'USER': 'ylqzeacxzzkvfn',
-            'PASSWORD': '2d9194b956096c0011feda1a22c2f7740244d569d2b817061ac90e4de3155239',
-            'HOST': 'ec2-50-19-224-165.compute-1.amazonaws.com',
-            'PORT': '5432',
-        }
+# if db_url != False:
+#     import dj_database_url
+#     DATABASES = {'default': dj_database_url.config(default='postgres://ntiooriqitxelj:9a477ac3a8bdbdb3dd2c1d0b7645ce2a50ae7ddf416e68798259dd9f945c8eae@ec2-54-225-107-174.compute-1.amazonaws.com:5432/d2htjiivka87p4')}
+# else:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9vc6f348akak9',
+        'USER': 'ukhjrbpmikksxr',
+        'PASSWORD': '3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4',
+        'HOST': 'ec2-54-247-189-1.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'user_management',
-#         'USER': 'root',
-#         'PASSWORD': 'coderslab',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#     }
-# }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

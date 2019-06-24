@@ -10,7 +10,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
           <meta name="description" content="">
           <meta name="author" content="">
-          <title>User management</title>
+          <title>URL Maker</title>
           <!-- Bootstrap core CSS-->
           <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
           <!-- Custom fonts for this template-->
@@ -24,7 +24,7 @@
         <body class="fixed-nav sticky-footer bg-dark" id="page-top">
           <!-- Navigation-->
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-            <a class="navbar-brand" href="/">User management</a>
+            <a class="navbar-brand" href="/">URL Maker</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,45 +32,19 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <a class="nav-link" href="/">
+                  <a class="nav-link" href="/url_maker">
                     <i class="fa fa-fw fa-dashboard"></i>
                     <span class="nav-link-text">Home Page</span>
                   </a>
                 </li>
 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                  <a class="nav-link" href="/admin">
                     <i class="fa fa-fw fa-sitemap"></i>
-                    <span class="nav-link-text">Menu Levels</span>
+                    <span class="nav-link-text">Admin Panel</span>
                   </a>
-                  <ul class="sidenav-second-level collapse" id="collapseMulti">
-                    <li>
-                      <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#user">Users</a>
-                      <ul class="sidenav-third-level collapse" id="user">
-                        <li>
-                          <a href="/">List</a>
-                        </li>
-                        <li>
-                          <a href="/add_user">Add new</a>
-                        </li>
-                      </ul>
-                    </li>
-
-                    <li>
-                      <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#group">Groups</a>
-                      <ul class="sidenav-third-level collapse" id="group">
-                        <li>
-                          <a href="/groups_list">List</a>
-                        </li>
-                        <li>
-                          <a href="/add_group">Add new</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
                 </li>
 
-              </ul>
               <ul class="navbar-nav sidenav-toggler">
                 <li class="nav-item">
                   <a class="nav-link text-center" id="sidenavToggler">
@@ -83,13 +57,6 @@
 
           <div class="content-wrapper">
             <div class="container-fluid">
-              <!-- Breadcrumbs-->
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="/">User management</a>
-                </li>
-                <li class="breadcrumb-item active">Home Page</li>
-              </ol>
 
 
                 {% block content %}
