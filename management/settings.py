@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import sys
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -79,10 +80,24 @@ WSGI_APPLICATION = 'management.wsgi.application'
 
 # DATABASES = { 'default': dj_database_url.config() }
 
+env = os.environ
+local = (sys.argv[1] == 'runserver')
 
-import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://ukhjrbpmikksxr:3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4@ec2-54-247-189-1.eu-west-1.compute.amazonaws.com:5432/d9vc6f348akak9')}
-
+if not local:
+    DEBUG = False
+    DATABASES = {'default': dj_database_url.config(default=env['DATABASE_URL'])}
+else:
+    DEBUG = True
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'url_maker',
+            'USER': 'hubert',
+            'PASSWORD': 'my_pass',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
