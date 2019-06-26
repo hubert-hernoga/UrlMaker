@@ -19,21 +19,16 @@ class UrlMaker(View):
     def post(self, request):
         url_form = UrlForm(request.POST)
 
-        try:
-            user_url = self.user_url(url_form)
-            short_url = self.shorten_url(user_url)
 
-            db_url = Url.objects.create(url=user_url)
-            db_url.short_url = short_url
-            db_url.save()
+        user_url = self.user_url(url_form)
+        short_url = self.shorten_url(user_url)
 
-            return redirect('/urls_list')
+        db_url = Url.objects.create(url=user_url)
+        db_url.short_url = short_url
+        db_url.save()
 
-        except:
-            ctx = {
-                'url_form': url_form,
-            }
-            return render(request, 'add_url.html', ctx)
+        return redirect('/urls_list')
+
 
     def user_url(self, url_form):
         if url_form.is_valid():
