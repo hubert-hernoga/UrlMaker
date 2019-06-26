@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             name='GroupMember',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='membership', to='url_maker.Group')),
+                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='membership', to='user_panel.Group')),
             ],
         ),
         migrations.CreateModel(
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='groupmember',
             name='profile',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='membership', to='url_maker.Profile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='membership', to='user_panel.Profile'),
         ),
         migrations.AddField(
             model_name='groupmember',

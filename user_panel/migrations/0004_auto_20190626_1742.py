@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('url_maker', '0003_auto_20190626_1605'),
+        ('user_panel', '0003_auto_20190626_1605'),
     ]
 
     operations = [

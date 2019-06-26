@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class UrlMakerConfig(AppConfig):
-    name = 'url_maker'
+    name = 'user_panel'
