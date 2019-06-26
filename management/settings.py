@@ -83,7 +83,7 @@ env = os.environ.copy()
 db_url = env.get('DATABASE_URL', False)
 
 if db_url != False:
-    DATABASES = {'default': dj_database_url.config(default='postgres://ukhjrbpmikksxr:3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4@ec2-54-247-189-1.eu-west-1.compute.amazonaws.com:5432/d9vc6f348akak9')}
+    DATABASES = {'default': dj_database_url.config(default='postgres://pgbtmmlaryfieg:e371fcb1e5156a2cdd4f569be209d08175eb0850892df9db2ae960028fd59545@ec2-54-228-246-214.eu-west-1.compute.amazonaws.com:5432/dbfebekeu15ark')}
 else:
     DATABASES = {
         'default': {
