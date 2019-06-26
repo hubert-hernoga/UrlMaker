@@ -77,17 +77,12 @@ WSGI_APPLICATION = 'management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-env = os.environ.copy()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.get('NAME', False),
-        'USER': env.get('USER', False),
-        'PASSWORD': env.get('PASSWORD', False),
-        'HOST': env.get('HOST', False),
-        'PORT': env.get('PORT', False),
-    }
-}
+# DATABASES = { 'default': dj_database_url.config() }
+
+
+import dj_database_url
+DATABASES = {'default': dj_database_url.config(default='postgres://ukhjrbpmikksxr:3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4@ec2-54-247-189-1.eu-west-1.compute.amazonaws.com:5432/d9vc6f348akak9')}
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
