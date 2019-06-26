@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Urls
+from .models import Url
 
-class UrlsAdmin(admin.ModelAdmin):
-
+class UrlAdmin(admin.ModelAdmin):
     list_display = ['id', 'url', 'short_url']
 
-admin.site.register(Urls, UrlsAdmin)
+admin.site.register(Url, UrlAdmin)

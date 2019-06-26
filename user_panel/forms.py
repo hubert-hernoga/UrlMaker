@@ -1,5 +1,5 @@
 from django import forms
-from .models import Urls
+from .models import Url
 
 
 class UserForm(forms.ModelForm):
@@ -10,5 +10,12 @@ class UrlForm(forms.ModelForm):
     url = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'url'}))
 
     class Meta:
-        model = Urls
+        model = Url
         fields = ['url']
+
+    def clean_url(self):
+        url = self.cleaned_data['url']
+
+        if not url:
+            raise forms.ValidationError('The field can not be empty')
+        return url

@@ -3,15 +3,15 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 
 from .forms import  UrlForm
-from .models import Urls
+from .models import Url
 
 
 class UrlsList(View):
     def get(self, request):
-        url = Urls.objects.latest('id')
+        url = Url.objects.latest('id')
 
         ctx = {
-            'urls': url
+            'url': url
         }
         return render(request, 'urls_list.html', ctx)
 
@@ -26,16 +26,20 @@ class UrlMaker(View):
         return render(request, 'add_group.html', ctx)
 
     def post(self, request):
-        group_form = UrlForm(request.POST)
+        url = self.user_url(request)
+        db_url = Url.objects.create(url=url)
+        db_url.save()
 
-        if group_form.is_valid():
-            url = group_form.cleaned_data['url']
-            group = Urls.objects.create(url=url)
-            group.save()
+        short_url = self.shorten_url(url)
+        db_url = Url.objects.create(short_url=short_url)
+        db_url.save()
 
-            return redirect('/urls_list')
+        return redirect('/urls_list')
 
-        ctx = {
-            'group_form': group_form,
-        }
-        return render(request, 'add_group.html', ctx)
+    def user_url(self, request):
+        url_form = UrlForm(request.POST)
+        if url_form.is_valid():
+            return url_form.cleaned_data['url']
+
+    def shorten_url(self, url):
+        return url.upper()

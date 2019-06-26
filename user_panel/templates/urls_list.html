@@ -4,7 +4,7 @@
 
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-table"></i> Urls list</div>
+              <i class="fa fa-table"></i> Your shorter url</div>
             <div class="card-body">
               <div class="table-responsive">
 
@@ -17,7 +17,7 @@
 
                   <tbody>
                     <tr id="{{ url.id }}" class="current-group">
-                        <td>{{ url.result }}</td>
+                        <td>{{ url.short_url }}</td>
                     </tr>
                   </tbody>
 
@@ -25,7 +25,7 @@
 
               </div>
             </div>
-            <div class="card-footer small text-muted">We have {{ urls.count }} urls</div>
+
           </div>
         </div>
 
