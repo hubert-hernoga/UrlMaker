@@ -15,7 +15,6 @@ class UrlForm(forms.ModelForm):
 
     def clean_url(self):
         url = self.cleaned_data['url']
-
         if not url:
-            raise forms.ValidationError('The field can not be empty')
+            raise forms.ValidationError('This field can not be empty')
         return url

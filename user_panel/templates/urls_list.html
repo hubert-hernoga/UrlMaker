@@ -17,7 +17,13 @@
 
                   <tbody>
                     <tr id="{{ url.id }}" class="current-group">
-                        <td>{{ url.short_url }}</td>
+
+                        <td>
+                            <a href="{{ url.url }}">
+                                {{ url.short_url }}
+                            </a>
+                        </td>
+
                     </tr>
                   </tbody>
 
