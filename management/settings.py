@@ -77,24 +77,15 @@ WSGI_APPLICATION = 'management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = { 'default': dj_database_url.config() }
-
 env = os.environ.copy()
-env['DATABASE_URL'] = 'postgres://ukhjrbpmikksxr:3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4@ec2-54-247-189-1.eu-west-1.compute.amazonaws.com:5432/d9vc6f348akak9'
-db_url = env.get('DATABASE_URL', False)
-
-if db_url != False:
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config(default='postgres://ukhjrbpmikksxr:3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4@ec2-54-247-189-1.eu-west-1.compute.amazonaws.com:5432/d9vc6f348akak9')}
-else:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd9vc6f348akak9',
-        'USER': 'ukhjrbpmikksxr',
-        'PASSWORD': '3716836e3a9b8ca4d272a54115748131a55b3d80dc82b91aad62dc00e2fdb6e4',
-        'HOST': 'ec2-54-247-189-1.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+        'NAME': env.get('NAME', False),
+        'USER': env.get('USER', False),
+        'PASSWORD': env.get('PASSWORD', False),
+        'HOST': env.get('HOST', False),
+        'PORT': env.get('PORT', False),
     }
 }
 
