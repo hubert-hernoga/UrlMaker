@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from user_panel.views import UrlMaker, UrlsList
+from url_maker.views import UrlMaker, UrlsList
 from django.conf.urls import url
 
 
