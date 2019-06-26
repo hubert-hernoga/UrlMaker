@@ -5,7 +5,8 @@ register = template.Library()
 
 @register.filter(name='user_in_group')
 def user_in_group(name_group):
-    group = Url.objects.get(name=name_group)
+    print(name_group)
+    group = Url.objects.get(result=name_group)
     users = group.users.all()
 
     return ", ".join([str(user) for user in users])

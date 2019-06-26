@@ -78,20 +78,21 @@ from django.http import QueryDict
 #         return render(request, 'add_user.html', ctx)
 #
 
-class GroupsList(View):
+class UrlsList(View):
     def get(self, request):
-        groups = Url.objects.all()
-
+        urls = Url.objects.all()
+        print('===================')
+        print(urls)
         ctx = {
-            'groups': groups
+            'urls': urls
         }
-        return render(request, 'groups_list.html', ctx)
+        return render(request, 'urls_list.html', ctx)
 
     def delete(self, request):
         group_id = QueryDict(request.body).get('group_id')
         Url.objects.filter(pk=group_id).delete()
 
-        return redirect('/groups_list')
+        return redirect('/urls_list')
 
 
 class UrlMaker(View):
@@ -115,10 +116,10 @@ class UrlMaker(View):
             #     group.url = group_form.cleaned_data['url']
             #     group.save()
             # else:
-            group = Url.objects.create(url=url)
+            group = Url.objects.create(result=url)
             group.save()
 
-            return redirect('/groups_list')
+            return redirect('/urls_list')
 
         ctx = {
             'group_form': group_form,
