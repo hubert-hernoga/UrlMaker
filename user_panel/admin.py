@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Urls
 
-# Register your models here.
+class UrlsAdmin(admin.ModelAdmin):
+
+    list_display = ['id', 'url', 'short_url']
+
+admin.site.register(Urls, UrlsAdmin)

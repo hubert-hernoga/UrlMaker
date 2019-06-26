@@ -16,13 +16,9 @@
                   </thead>
 
                   <tbody>
-                  {% for url in urls %}
-
-                    <tr id="{{ group.id }}" class="current-group">
-                      <td>{{ url.result }}</td>
+                    <tr id="{{ url.id }}" class="current-group">
+                        <td>{{ url.result }}</td>
                     </tr>
-
-                  {% endfor %}
                   </tbody>
 
                 </table>

@@ -1,5 +1,5 @@
 from django import template
-from ..models import Url
+from ..models import Urls
 
 register = template.Library()
 

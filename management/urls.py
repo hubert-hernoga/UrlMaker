@@ -21,6 +21,6 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('urls_list/', UrlsList.as_view(), name='urls_list'),
-    url('', UrlMaker.as_view(), name='url_maker')
+    url('^$', UrlMaker.as_view(), name='url_maker'),
+    url('urls_list/', UrlsList.as_view(), name='urls_list')
 ]
